@@ -2,6 +2,16 @@
 
 setup-php-cli (SPC) is a command line utility to run [setup-php](https://github.com/shivammathur/setup-php).
 
+## Support
+
+|Host OS/Virtual environment|PHP Supported|
+|--- |--- |
+|Ubuntu 16.04|`PHP 5.6` to `PHP 7.4`|
+|Ubuntu 18.04|`PHP 5.6` to `PHP 7.4`|
+|Ubuntu 20.04|`PHP 5.6` to `PHP 7.4`|
+|macOS Catalina 10.15|`PHP 5.6` to `PHP 7.4`|
+|macOS Big Sur 11.0|`PHP 5.6` to `PHP 7.4`|
+
 ## Install
 
 - Using composer
@@ -90,7 +100,7 @@ spc -t "random_tool" -f "true"
 spc -u "true"
 ```
 
-- Setup TS/NTS PHP on `Windows`.
+- Setup TS/NTS PHP on `Windows`. (Not supported currently)
 
 ```bash
 spc -p "7.4" -z "ts"
