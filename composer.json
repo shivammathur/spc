@@ -1,0 +1,15 @@
+{
+  "name": "shivammathur/spc",
+  "license" : "MIT",
+  "authors" : [
+    {
+      "name" : "Shivam Mathur"
+    }
+  ],
+  "bin" : ["spc"],
+  "scripts": {
+    "version": "spc -V",
+    "upgrade": "spc -U",
+    "help": "spc -h"
+  }
+}
