@@ -8,6 +8,8 @@ setup-php-cli (SPC) is a command line utility to run [setup-php](https://github.
 
 ```bash
 composer global require shivammathur/spc
+sudo cp $(composer global config home)/vendor/bin/spc /usr/local/bin/spc
+sudo chmod a+x /usr/local/bin/spc
 ```
 
 - Download from Releases
