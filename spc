@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TAG='v2'
-VERSION='0.0.1-dev'
+VERSION='0.0.2'
 GITHUB='https://github.com'
 
 export RUNNER_TOOL_PATH="/tmp"
