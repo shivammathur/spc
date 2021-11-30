@@ -1,0 +1,28 @@
+name: Publish SPC
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Add keys
+        id: add-key
+        run: |
+          cat <(echo -e "${{ secrets.GPG_KEY }}") | gpg --pinentry-mode=loopback --passphrase ${{ secrets.GPG_PASS }} --import
+          gpg --import key.asc
+          fp=$(gpg --list-packets key.asc |  grep -Eo 'fpr\sv4\s.*[a-zA-Z0-9]+' | head -n 1 | cut -d ' ' -f 3)
+          echo "::set-output name=key-id::$fp"
+      - name: Sign spc
+        run: gpg --pinentry-mode=loopback --passphrase ${{ secrets.GPG_PASS }} --default-key ${{ steps.add-key.outputs.key-id }} --sign spc
+      - name: Detach signature
+        run: gpg --armor --default-key ${{ steps.add-key.outputs.key-id }} --output spc.asc --detach-sig spc
+      - name: Verify signature
+        run: gpg --verify spc.asc spc
+      - name: Upload
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${GITHUB_REF/refs\/tags\/} --clobber key.asc spc spc.asc
