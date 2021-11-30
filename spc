@@ -115,6 +115,12 @@ fi
 rm -rf /tmp/setup-php
 curl -sL "$GITHUB"/shivammathur/setup-php/archive/"$TAG".tar.gz | tar -xz -C /tmp
 mv /tmp/setup-php* /tmp/setup-php
+
+# Patch color for GitLab
+if [ ! -z ${GITLAB_CI+x} ] && [ "$GITLAB_CI" = "true" ]; then
+  sed -i 's/\[90/\[37/g' /tmp/setup-php/src/scripts/common.sh
+fi
+
 env 'runner=self-hosted' \
   env 'php-version='"$php_version" \
   env 'extensions='"$extensions" \
