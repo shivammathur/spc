@@ -1,13 +1,11 @@
 #!/bin/bash
 
 TAG='v2'
-VERSION='0.0.2'
+VERSION='0.0.3'
 GITHUB='https://github.com'
 
 export RUNNER_TOOL_PATH="/tmp"
 export RUNNER_TOOL_CACHE="/tmp"
-export GITHUB_ENV=/dev/null
-export GITHUB_PATH=/dev/null
 
 read -r -d '' HELP << EOM
     SYNOPSIS
