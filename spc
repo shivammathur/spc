@@ -18,6 +18,7 @@ read -r -d '' HELP << EOM
     OPTIONS
     -p "[PHP Version]", --php-version "[PHP Version]"    Specify PHP version (Required if PHP is not installed)
     -e "[Extensions]", --extensions "[Extensions]"       Specify extensions
+    -b "[INI Values]", --ini-file "[INI File]"           Specify base ini file
     -i "[INI Values]", --ini-values "[INI Values]"       Specify ini values
     -c "[Coverage]", --coverage "[Coverage]"             Specify Coverage driver
     -t "[Tools]", --tools "[Tools]"                      Specify tools
@@ -53,6 +54,7 @@ while [ $# -gt 0 ] ; do
   case $1 in
     -p | --php-version) php_version="$2" ;;
     -e | --extensions) extensions="$2" ;;
+    -b | --ini-file) ini_file="$2" ;;
     -i | --ini-values) ini_values="$2" ;;
     -c | --coverage) coverage="$2" ;;
     -t | --tools) tools="$2" ;;
@@ -73,6 +75,7 @@ if [ "$TAG" = "verbose" ]; then
   printf "\033[34;1mrelease: \033[0m\033[33;1m%s\033[0m\n" "$TAG"
   if [ "$php_version" != "" ]; then printf "\033[34;1mphp-version: \033[0m\033[33;1m%s\033[0m\n" "$php_version"; fi
   if [ "$extensions" != "" ]; then printf "\033[34;1mextensions: \033[0m\033[33;1m%s\033[0m\n" "$extensions"; fi
+  if [ "$ini_file" != "" ]; then printf "\033[34;1mini-file: \033[0m\033[33;1m%s\033[0m\n" "$ini_file"; fi
   if [ "$ini_values" != "" ]; then printf "\033[34;1mini-values: \033[0m\033[33;1m%s\033[0m\n" "$ini_values"; fi
   if [ "$coverage" != "" ]; then printf "\033[34;1mcoverage: \033[0m\033[33;1m%s\033[0m\n" "$coverage"; fi
   if [ "$tools" != "" ]; then printf "\033[34;1mtools: \033[0m\033[33;1m%s\033[0m\n" "$tools"; fi
@@ -122,6 +125,7 @@ fi
 env 'runner=self-hosted' \
   env 'php-version='"$php_version" \
   env 'extensions='"$extensions" \
+  env 'ini-file='"$ini_file" \
   env 'ini-values='"$ini_values" \
   env 'coverage='"$coverage" \
   env 'tools='"$tools" \
