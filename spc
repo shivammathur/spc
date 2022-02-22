@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TAG='v2'
-VERSION='0.0.3'
+VERSION='0.0.4'
 GITHUB='https://github.com'
 
 os="$(uname -s)"
