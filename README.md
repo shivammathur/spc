@@ -8,6 +8,7 @@ setup-php-cli (SPC) is a command line utility to run [setup-php](https://github.
 |--- |--- |
 |Ubuntu 20.04|`PHP 5.6` to `PHP 8.2`|
 |Ubuntu 18.04|`PHP 5.6` to `PHP 8.2`|
+|Windows with cygwin|`PHP 5.6` to `PHP 8.2`|
 |macOS Monterey 12.x|`PHP 5.6` to `PHP 8.2`|
 |macOS Big Sur 11.x|`PHP 5.6` to `PHP 8.2`|
 |macOS Catalina 10.15|`PHP 5.6` to `PHP 8.2`|
@@ -44,6 +45,7 @@ sudo chmod a+x /usr/local/bin/spc
 ```bash
 -p "[PHP Version]", --php-version "[PHP Version]"    Specify PHP version (Required if PHP is not installed)
 -e "[Extensions]", --extensions "[Extensions]"       Specify extensions
+-b "[INI File]", --ini-file "[INI Values]"           Specify base ini file
 -i "[INI Values]", --ini-values "[INI Values]"       Specify ini values
 -c "[Coverage]", --coverage "[Coverage]"             Specify Coverage driver
 -t "[Tools]", --tools "[Tools]"                      Specify tools
@@ -68,6 +70,12 @@ spc -p "7.4"
 
 ```bash
 spc -e "intl, xml"
+```
+
+- Set the base php.ini file, say set it to `development`.
+
+```bash
+spc -b "development"
 ```
 
 - Add any configuration to your php.ini, say set timezone to `UTC`.
