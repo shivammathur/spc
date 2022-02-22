@@ -4,8 +4,25 @@ TAG='v2'
 VERSION='0.0.3'
 GITHUB='https://github.com'
 
-export RUNNER_TOOL_PATH="/tmp"
-export RUNNER_TOOL_CACHE="/tmp"
+os="$(uname -s)"
+if [[ "$os" = "Linux" || "$os" = "Darwin" ]]; then
+  os=unix
+  temp=/dev/null
+  bin_dir=/usr/local/bin
+  temp_dir=/tmp
+  rtools=('sudo' 'printf' 'node')
+else
+  os=windows
+  temp=nul
+  bin_dir='C:\tools\bin'
+  temp_dir='C:\tools\tmp'
+  rtools=('printf' 'node')
+fi
+
+export RUNNER_TOOL_PATH="$temp_dir"
+export RUNNER_TOOL_CACHE="$temp_dir"
+
+mkdir -p "$bin_dir" "$temp_dir"
 
 read -r -d '' HELP << EOM
     SYNOPSIS
@@ -36,9 +53,14 @@ read -r -d '' HELP << EOM
 EOM
 
 upgrade() {
-  sudo curl -o /tmp/spc -sL "$GITHUB"/shivammathur/spc/releases/latest/download/spc
-  bash /tmp/spc -V
-  trap "sudo mv /tmp/spc /usr/local/bin/spc; sudo chmod a+x /usr/local/bin/spc" EXIT
+  if [[ "$os" = "unix" ]]; then
+    curl -o "$temp_dir"/spc -sL "$GITHUB"/shivammathur/spc/releases/latest/download/spc
+    bash "$temp_dir"/spc -V
+    trap "sudo mv $temp_dir/spc $bin_dir; sudo chmod a+x $bin_dir/spc" EXIT
+  else
+    curl -o "$bin_dir"/spc -sL "$GITHUB"/shivammathur/spc/releases/latest/download/spc
+    sh "$bin_dir"/spc -V
+  fi  
   exit 0
 }
 
@@ -47,7 +69,7 @@ err() {
 }
 
 check_url() {
-  curl -o /dev/null -sfIL "$1"
+  curl -o "$temp" -sfIL "$1"
 }
 
 while [ $# -gt 0 ] ; do
@@ -84,7 +106,7 @@ if [ "$TAG" = "verbose" ]; then
   if [ "$update" != "" ]; then printf "\033[34;1mupdate: \033[0m\033[33;1m%s\033[0m\n" "$update"; fi
 fi
 
-for cmd in sudo printf node; do
+for cmd in "${rtools[@]}"; do
   if ! command -v "$cmd" >/dev/null; then
     err "$cmd not found in PATH"
     exit 1;
@@ -113,13 +135,14 @@ if ! check_url "$GITHUB"/shivammathur/setup-php/tree/"$TAG"; then
   exit 1;
 fi
 
-rm -rf /tmp/setup-php
-curl -sL "$GITHUB"/shivammathur/setup-php/archive/"$TAG".tar.gz | tar -xz -C /tmp
-mv /tmp/setup-php* /tmp/setup-php
+rm -rf "$temp_dir"/setup-php
+curl -o "$temp_dir"/sp.tgz -sL "$GITHUB"/shivammathur/setup-php/archive/"$TAG".tar.gz
+tar -xf "$temp_dir"/sp.tgz -C "$temp_dir"
+mv "$temp_dir"/setup-php* "$temp_dir"/setup-php
 
 # Patch color for GitLab
 if [ ! -z ${GITLAB_CI+x} ] && [ "$GITLAB_CI" = "true" ]; then
-  sed -i 's/\[90/\[37/g' /tmp/setup-php/src/scripts/common.sh
+  sed -i 's/\[90/\[37/g' "$temp_dir"/setup-php/src/scripts/common.sh
 fi
 
 env 'runner=self-hosted' \
@@ -131,6 +154,6 @@ env 'runner=self-hosted' \
   env 'tools='"$tools" \
   env 'fail-fast='"$fail_fast" \
   env 'phpts='"$phpts" \
-  env 'update='"$update" node /tmp/setup-php/dist/index.js
+  env 'update='"$update" node "$temp_dir"/setup-php/dist/index.js
 
 exit 0;
