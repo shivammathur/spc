@@ -12,6 +12,7 @@ jobs:
       - name: Add keys
         id: add-key
         run: |
+          curl -o key.asc -sL https://github.com/shivammathur.gpg
           cat <(echo -e "${{ secrets.GPG_KEY }}") | gpg --pinentry-mode=loopback --passphrase ${{ secrets.GPG_PASS }} --import
           gpg --import key.asc
           fp=$(gpg --list-packets key.asc |  grep -Eo 'fpr\sv4\s.*[a-zA-Z0-9]+' | head -n 1 | cut -d ' ' -f 3)

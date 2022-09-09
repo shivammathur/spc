@@ -31,7 +31,7 @@ curl -o /tmp/spc -sL https://github.com/shivammathur/spc/releases/latest/downloa
 
 # Verify
 curl -o /tmp/spc.asc -sL https://github.com/shivammathur/spc/releases/latest/download/spc.asc
-curl -o /tmp/key.asc -sL https://github.com/shivammathur/spc/releases/latest/download/key.asc
+curl -o /tmp/key.asc -sL https://github.com/shivammathur.gpg
 gpg --import /tmp/key.asc
 gpg --verify /tmp/spc.asc /tmp/spc
 
