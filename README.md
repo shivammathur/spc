@@ -6,12 +6,13 @@ setup-php-cli (SPC) is a command line utility to run [setup-php](https://github.
 
 |Host OS/Virtual environment|PHP Supported|
 |--- |--- |
-|Ubuntu 20.04|`PHP 5.6` to `PHP 8.2`|
-|Ubuntu 18.04|`PHP 5.6` to `PHP 8.2`|
-|Windows with cygwin|`PHP 5.6` to `PHP 8.2`|
-|macOS Monterey 12.x|`PHP 5.6` to `PHP 8.2`|
-|macOS Big Sur 11.x|`PHP 5.6` to `PHP 8.2`|
-|macOS Catalina 10.15|`PHP 5.6` to `PHP 8.2`|
+|Ubuntu 22.04|`PHP 5.6` to `PHP 8.3`|
+|Ubuntu 20.04|`PHP 5.6` to `PHP 8.3`|
+|Ubuntu 18.04|`PHP 5.6` to `PHP 8.3`|
+|Windows with cygwin|`PHP 5.6` to `PHP 8.3`|
+|macOS Monterey 12.x|`PHP 5.6` to `PHP 8.3`|
+|macOS Big Sur 11.x|`PHP 5.6` to `PHP 8.3`|
+|macOS Catalina 10.15|`PHP 5.6` to `PHP 8.3`|
 
 ## Install
 
