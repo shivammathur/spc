@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TAG='v2'
-VERSION='0.0.4'
+VERSION='0.0.5'
 GITHUB='https://github.com'
 
 os="$(uname -s)"
@@ -39,6 +39,7 @@ read -r -d '' HELP << EOM
     -i "[INI Values]", --ini-values "[INI Values]"       Specify ini values
     -c "[Coverage]", --coverage "[Coverage]"             Specify Coverage driver
     -t "[Tools]", --tools "[Tools]"                      Specify tools
+    -u "[Debug]", --debug "[Debug]"                      Specify debug flag
     -f "[Fail Fast]", --fail-fast "[Fail Fast]"          Specify fail-fast flag
     -z "[PHP TS/NTS]", --phpts "[PHPTS/NTS]"             Specify phpts flag
     -u "[Update]", --update "[Update]"                   Specify update flag
@@ -83,6 +84,7 @@ while [ $# -gt 0 ] ; do
     -r | --release) TAG="$2" ;;
     -f | --fail-fast) fail_fast="$2" ;;
     -z | --phpts) phpts="$2" ;;
+    -d | --debug) debug="$2" ;;
     -u | --update) update="$2" ;;
     -v | --verbose) TAG="verbose" ;;
     -V | --version) echo "$VERSION"; exit 0; ;;
@@ -101,6 +103,7 @@ if [ "$TAG" = "verbose" ]; then
   if [ "$ini_values" != "" ]; then printf "\033[34;1mini-values: \033[0m\033[33;1m%s\033[0m\n" "$ini_values"; fi
   if [ "$coverage" != "" ]; then printf "\033[34;1mcoverage: \033[0m\033[33;1m%s\033[0m\n" "$coverage"; fi
   if [ "$tools" != "" ]; then printf "\033[34;1mtools: \033[0m\033[33;1m%s\033[0m\n" "$tools"; fi
+  if [ "$debug" != "" ]; then printf "\033[34;1mdebug: \033[0m\033[33;1m%s\033[0m\n" "$debug"; fi
   if [ "$fail_fast" != "" ]; then printf "\033[34;1mfail-fast: \033[0m\033[33;1m%s\033[0m\n" "$fail_fast"; fi
   if [ "$phpts" != "" ]; then printf "\033[34;1mphpts: \033[0m\033[33;1m%s\033[0m\n" "$phpts"; fi
   if [ "$update" != "" ]; then printf "\033[34;1mupdate: \033[0m\033[33;1m%s\033[0m\n" "$update"; fi
@@ -152,6 +155,7 @@ env 'runner=self-hosted' \
   env 'ini-values='"$ini_values" \
   env 'coverage='"$coverage" \
   env 'tools='"$tools" \
+  env 'debug='"$debug" \
   env 'fail-fast='"$fail_fast" \
   env 'phpts='"$phpts" \
   env 'update='"$update" node "$temp_dir"/setup-php/dist/index.js
