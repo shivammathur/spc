@@ -50,6 +50,7 @@ sudo chmod a+x /usr/local/bin/spc
 -i "[INI Values]", --ini-values "[INI Values]"       Specify ini values
 -c "[Coverage]", --coverage "[Coverage]"             Specify Coverage driver
 -t "[Tools]", --tools "[Tools]"                      Specify tools
+-f "[Debug]", --debug "[Debug]"                      Specify debug flag
 -f "[Fail Fast]", --fail-fast "[Fail Fast]"          Specify fail-fast flag
 -z "[PHP TS/NTS]", --phpts "[PHPTS/NTS]"             Specify phpts flag
 -u "[Update]", --update "[Update]"                   Specify update flag
@@ -95,6 +96,12 @@ spc -c "pcov"
 
 ```bash
 spc -t "phpunit"
+```
+
+- Setup a debug build of PHP.
+
+```bash
+spc -p 8.1 -d "true"
 ```
 
 - Fail if an extension, or a tool does not install.
