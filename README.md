@@ -6,12 +6,12 @@ setup-php-cli (SPC) is a command line utility to run [setup-php](https://github.
 
 |Host OS/Virtual environment|PHP Supported|
 |--- |--- |
-|Ubuntu 24.04|`PHP 5.6` to `PHP 8.4`|
-|Ubuntu 22.04|`PHP 5.6` to `PHP 8.4`|
-|Windows with cygwin|`PHP 5.6` to `PHP 8.4`|
-|macOS Sequoia 15.x|`PHP 5.6` to `PHP 8.4`|
-|macOS Sonoma 14.x|`PHP 5.6` to `PHP 8.4`|
-|macOS Ventura 13.x|`PHP 5.6` to `PHP 8.4`|
+|Ubuntu 24.04|`PHP 5.6` to `PHP 8.5`|
+|Ubuntu 22.04|`PHP 5.6` to `PHP 8.5`|
+|Windows with cygwin|`PHP 5.6` to `PHP 8.5`|
+|macOS Sequoia 15.x|`PHP 5.6` to `PHP 8.5`|
+|macOS Sonoma 14.x|`PHP 5.6` to `PHP 8.5`|
+|macOS Ventura 13.x|`PHP 5.6` to `PHP 8.5`|
 
 ## Install
 
@@ -61,13 +61,13 @@ sudo chmod a+x /usr/local/bin/spc
 
 ## Examples
 
-- Install or switch to a particular PHP version. For example to install `PHP 7.4`.
+- Install or switch to a particular PHP version. For example to install `PHP 8.4`.
 
 ```bash
-spc -p "7.4"
+spc -p "8.4"
 ```
 
-- Install PHP extension, say `intl` and `xml` on `PHP 7.4`.
+- Install PHP extension, say `intl` and `xml` on `PHP 8.4`.
 
 ```bash
 spc -e "intl, xml"
@@ -118,7 +118,7 @@ spc -u "true"
 - Setup TS/NTS PHP on `Windows`. (Not supported currently)
 
 ```bash
-spc -p "7.4" -z "ts"
+spc -p "8.4" -z "ts"
 ```
 
 - Use a particular tag/release of `setup-php`, say to use `v1`.
